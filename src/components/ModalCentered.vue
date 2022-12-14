@@ -3,10 +3,12 @@
 
 
         <button 
-            class="block text-white bg-blue-500 hover:bg-blue-500 font-medium rounded-md text-sm px-3 py-1 text-center" type="button" data-modal-toggle="popup-modal"
+            :class="buttonClasse" type="button"
             @click="closeModal = true"
             >
-            Send message
+            <slot>
+                {{ title }}
+            </slot>
         </button>
             
             <Transition name="bounce">
@@ -25,9 +27,9 @@
                     </div>
                     <div class="modal_header py-1  border-b border-gray-300" :class="selected.length ? '' : 'flex items-center'">
                         <p class="font-semibold text-lg mx-4">To:</p>
-                            <ul class="mx-4">
+                            <ul class="mx-4 grid grid-cols-3">
                                 <li 
-                                    class="text-xs text-blue-500 mx-1 my-1 flex items-center" 
+                                    class="text-xs text-blue-500 mx-1 my-1 flex items-center bg-blue-100 rounded-full px-2 py-1" 
                                     v-for="(sel, index) in selected" 
                                     :key="index"
                                 > 
@@ -40,7 +42,8 @@
                                 </li>                                
                             </ul>
                         <input 
-                            v-model="search" 
+                            v-model="search"
+                            @input="$emit('update:modelValue', $event.target.value)"
                             type="text" 
                             :class="selected.length ? 'mx-4' : ''" 
                             class="rounded-0 border-0 py-3 outline-0" 
@@ -48,10 +51,12 @@
                         >
                     </div>      
                     <div class="overflow-scroll overflow-x-hidden h-96 border">
-                        <h6 class="ml-4 font-semibold text-sm my-3">Suggested</h6>
+                        <h6 class="ml-4 font-semibold text-sm my-3">
+                            Suggested
+                        </h6>
                         <ul class="ml-4">
                             <li 
-                                v-for="(item, index) in searchUser" 
+                                v-for="(item, index) in users" 
                                 :key="index" 
                                 class="my-2 flex justify-between items-center"
                             >
@@ -84,51 +89,34 @@
 </template>
 
 <script>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 
 export default {
     name: 'ModalCentered',
     props: {
-
+        users: {    
+            type: Array,
+            required: true
+        },
+        title: {
+            type: String,
+            required: false
+        },
+        buttonClasse: {
+            type: String,
+            required: false
+        }        
     },
     setup () {
         const el = ref(null)
-        const closeModal = ref(false)
         const search = ref('')
-        const users = reactive([
-            { img: require('../assets/user-man.jpg'), name: 'Narec Murphy', isChecked: false},
-            { img: require('../assets/user-woman.jpg'), name: 'Narec Cosmos', isChecked: false},
-            { img: require('../assets/user-man.jpg'), name: 'Santos Cosmos', isChecked: false},
-            { img: require('../assets/user-woman.jpg'), name: 'Narec Roth', isChecked: false},
-            { img: require('../assets/user-man.jpg'), name: 'Narec Bridges', isChecked: false},
-            { img: require('../assets/user-man.jpg'), name: 'Narec Harris', isChecked: false},
-            { img: require('../assets/user-woman.jpg'), name: 'Fuentes Cosmos', isChecked: false},
-            { img: require('../assets/user-man.jpg'), name: 'Narec Cosmos', isChecked: false},
-            { img: require('../assets/user-woman.jpg'), name: 'Narec Mckinney', isChecked: false},
-            { img: require('../assets/user-man.jpg'), name: 'Narec Friedman', isChecked: false},
-            { img: require('../assets/user-man.jpg'), name: 'Narec Cosmos', isChecked: false},
-            { img: require('../assets/user-woman.jpg'), name: 'Mckinney Cosmos', isChecked: false},
-            { img: require('../assets/user-man.jpg'), name: 'Narec Ferrell', isChecked: false},
-            { img: require('../assets/user-woman.jpg'), name: 'Narec Cosmos', isChecked: false},
-            { img: require('../assets/user-man.jpg'), name: 'Acevedo Acevedo', isChecked: false},
-            { img: require('../assets/user-man.jpg'), name: 'Narec Rollins', isChecked: false},
-            { img: require('../assets/user-woman.jpg'), name: 'Narec Cosmos', isChecked: false},
-            { img: require('../assets/user-man.jpg'), name: 'Narec Cosmos', isChecked: false},
-            { img: require('../assets/user-woman.jpg'), name: 'Narec Cosmos', isChecked: false},
-            { img: require('../assets/user-man.jpg'), name: 'Narec Cosmos', isChecked: false},            
-        ])
+        const closeModal = ref(false)
         const selected = reactive([])
 
         onClickOutside(el, () =>  {
             closeModal.value = false           
-        })        
-
-        const searchUser = computed(() => {
-            return users.filter(item => {
-                return item.name.toLowerCase().includes(search.value.toLocaleLowerCase())
-            })
-        })
+        })   
 
         function selectUser (user) {
             if(user.isChecked === false){
@@ -143,12 +131,10 @@ export default {
 
         return {
             closeModal,
-            users,
             el,
-            search,
-            searchUser,
             selected,
-            selectUser
+            search,
+            selectUser,
         }
     }
 }
