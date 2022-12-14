@@ -16,12 +16,12 @@
                             </button>
                         </div>
                     </div>
-                    <ul class="mt-20 mx-2">
-                        <li class="flex items-center mb-5 w-full cursor-pointer" v-for="(mess, index) in 15" :key="mess">
+                    <ul class="mt-5 mx-2">
+                        <li class="flex items-center mb-5 w-full cursor-pointer" v-for="(mess, index) in users" :key="index">
                             <div class="user-avatar-messages h-16 w-16 border rounded-full flex items-center justify-center ">
-                                AA
+                                <img :src="mess.img" alt="userImg" class="h-16 w-16 rounded-full">
                             </div>
-                            <span class="ml-2 text-gray-400 text-sm"> {{ index + 1 }} Lorem ipsum dolor </span>
+                            <span class="ml-2 text-gray-600 text-sm"> {{ mess.name }} </span>
                         </li>
                     </ul>                    
                 </div>
@@ -33,9 +33,10 @@
                     </div>
                     <h2 class="text-xl my-3">Your Messages</h2>
                     <p class="text-gray-500 text-sm my-3">Send private photos and messages to a friend or group.</p>
-                    <button class="text-white bg-blue-500 px-3 py-1 rounded-lg">
-                        Send message
-                    </button>
+                    <div class="mx-auto">
+                      <ModalCentered />
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -44,16 +45,45 @@
 
 
 <script>
+import { reactive } from "vue"
 import { useAuth0 } from "@auth0/auth0-vue"
+import ModalCentered from "@/components/ModalCentered.vue"
 
 export default {
   name: 'HomeView',
+  components: {
+    ModalCentered
+  },
 
   setup () {
 
     const { user, loginWithRedirect } = useAuth0()
+    const users = reactive([
+            { img: require('../assets/user-man.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-woman.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-man.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-woman.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-man.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-man.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-woman.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-man.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-woman.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-man.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-man.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-man.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-woman.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-man.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-woman.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-man.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-man.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-woman.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-man.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-woman.jpg'), name: 'Narec Cosmos', isChecked: false},
+            { img: require('../assets/user-man.jpg'), name: 'Narec Cosmos', isChecked: false},             
+        ])    
 
     return {
+      users,
       user,
       handleLogin: () => {
         loginWithRedirect({

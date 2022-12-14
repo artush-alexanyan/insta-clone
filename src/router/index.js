@@ -18,8 +18,13 @@ const routes = [
   {
     path: '/user/profile',
     name: 'UserProfile',
-    component: () => import(/* webpackChunkName: "about" */ '../user/UserProfile.vue')
-  }  
+    component: () => import(/* webpackChunkName: "profile" */ '../user/UserProfile.vue')
+  },
+  {
+    path: '/user/profile/test',
+    name: 'TestComponent',
+    component: () => import(/* webpackChunkName: "TestComponent" */ '../user/TestComponent.vue')
+  }      
 ]
 
 const router = createRouter({

@@ -36,7 +36,7 @@
                 <div class="w-60 h-58 fixed bottom-20 left-6" v-show="showMore">
                     <ul>
                         <li 
-                            class="flex items-center justify-between py-2 px-3 my-[0.125rem] rounded border border-gray-200 shadow cursor-wait bg-white"
+                            class="flex items-center justify-between py-2 px-3 rounded border border-gray-200 shadow cursor-wait bg-white"
                             v-for="(item, index) in sideBarMore"
                             :key="index"
                         >
@@ -60,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <Transition name="slide-fade" ref="root">
+        <Transition name="slide-fade" ref="el">
             <div class="w-80 z-0 bg-gray-50 border rounded-r-xl shadow-md" v-show="showTitles">
                 <div class="text-center mx-2">
                     <h3 class="text-left text-xl font-mono font-semibold mt-3">Search</h3>
@@ -73,7 +73,7 @@
                                 <div class="avatar name flex items-center">
                                     <img :src="user.picture" class="h-12 w-12 rounded-full" alt="user-picture">
                                     <div class="ml-4">
-                                        <p class="text-xs font-bold"> _{{ user.nickname }} </p>
+                                        <p class="text-xs font-bold"> {{ user.name }}  </p>
                                         <p class="text-[0.6rem] text-gray-400"> {{ user.email }} </p>                                    
                                     </div>
                                 </div>
@@ -138,9 +138,9 @@ export default {
             { title: 'Report a problem', svg: '<svg aria-label="Report a problem" class="_ab6-" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M18.001 1h-12a5.006 5.006 0 0 0-5 5v9.005a5.006 5.006 0 0 0 5 5h2.514l2.789 2.712a1 1 0 0 0 1.394 0l2.787-2.712h2.516a5.006 5.006 0 0 0 5-5V6a5.006 5.006 0 0 0-5-5Zm3 14.005a3.003 3.003 0 0 1-3 3h-2.936a1 1 0 0 0-.79.387l-2.274 2.212-2.276-2.212a1 1 0 0 0-.79-.387H6a3.003 3.003 0 0 1-3-3V6a3.003 3.003 0 0 1 3-3h12a3.003 3.003 0 0 1 3 3Zm-9-1.66a1.229 1.229 0 1 0 1.228 1.228A1.23 1.23 0 0 0 12 13.344Zm0-8.117a1.274 1.274 0 0 0-.933.396 1.108 1.108 0 0 0-.3.838l.347 4.861a.892.892 0 0 0 1.77 0l.348-4.86a1.106 1.106 0 0 0-.3-.838A1.272 1.272 0 0 0 12 5.228Z"></path></svg>' },
             { title: 'Switch accounts', svg: '' }
         ])
-        const root = ref(null)
+        const el = ref(null)
 
-        onClickOutside(root, (e) =>  {
+        onClickOutside(el, (e) =>  {
             if(e.target.className.baseVal != 'search'){
                 showTitles.value = false
             }            
@@ -169,7 +169,7 @@ export default {
             showTitles,
             sidebarList,
             pages,
-            root,
+            el,
             showMore,
             sideBarMore
     }

@@ -31,7 +31,7 @@
                     </div>                
                 </div>  
                 <div class="user-slogan">
-                    <h4 class="text-lg font-bold"> {{ user.nickname }} </h4>
+                    <h4 class="text-lg font-bold"> {{ user.name }}  </h4>
                     <p class="text-lg">Take a sad song and make it better 🙂</p>
                 </div>                              
             </div>
