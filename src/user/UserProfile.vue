@@ -101,7 +101,9 @@ import UserHome from "./UserHome.vue"
 import UserExplore from "./UserExplore.vue"
 import UserMessages from "./UserMessages.vue"
 import UserProfileInfo from "./UserProfileInfo.vue"
+import NewPost from "./NewPost.vue"
 import { ref, reactive, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { onClickOutside } from '@vueuse/core'
 
 export default {
@@ -113,15 +115,17 @@ export default {
         UserHome,
         UserExplore,
         UserMessages,
-        UserProfileInfo
+        UserProfileInfo,
+        NewPost
     },
     setup () {
-
+        const router = useRouter()
+        const route = useRoute()
         const { user, IsAuthenticated, logout } = useAuth0()
         const tab = ref(0)
         const showTitles = ref(false)
         const showMore = ref(false)
-        const pages = reactive([ 'UserHome', 'UserHome', 'UserExplore', 'UserMessages', 'UserHome', 'UserHome', 'UserProfileInfo' ])
+        const pages = reactive([ 'UserHome', '', 'UserExplore', 'UserMessages', '', 'NewPost', 'UserProfileInfo' ])
         const sidebarList = reactive([
                     { title: 'Home', svg: `<svg aria-label="Home" class="_ab6-" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M9.005 16.545a2.997 2.997 0 0 1 2.997-2.997A2.997 2.997 0 0 1 15 16.545V22h7V11.543L12 2 2 11.543V22h7.005Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>` },
                     { title: 'Search', svg: `<svg aria-label="Search" class="search" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M19 10.5A8.5 8.5 0 1 1 10.5 2a8.5 8.5 0 0 1 8.5 8.5Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="16.511" x2="22" y1="16.511" y2="22"></line></svg>` },
@@ -146,7 +150,8 @@ export default {
             }            
         })
         onMounted(() => {
-           
+           console.log(useRouter, 'Router')
+           console.log(useRoute, 'useRoute')
       })        
 
         return {        
@@ -171,7 +176,9 @@ export default {
             pages,
             el,
             showMore,
-            sideBarMore
+            sideBarMore,
+            router,
+            route
     }
         
     }

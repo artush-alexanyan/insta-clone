@@ -49,10 +49,42 @@
                             class="rounded-0 border-0 py-3 outline-0" 
                             placeholder="Search..."
                         >
+                        <button class="ml-4" @click="search = ''" v-show="search.length">
+                            <svg 
+                                aria-label="Close" 
+                                class="_ab6-" 
+                                color="#262626" 
+                                fill="#262626" 
+                                height="12" 
+                                role="img" 
+                                viewBox="0 0 24 24" 
+                                width="12"
+                            >
+                                <polyline 
+                                    fill="none" 
+                                    points="20.643 3.357 12 12 3.353 20.647" 
+                                    stroke="currentColor" 
+                                    stroke-linecap="round" 
+                                    stroke-linejoin="round" 
+                                    stroke-width="3">
+                                </polyline>
+                                <line 
+                                    fill="none" 
+                                    stroke="currentColor" 
+                                    stroke-linecap="round" 
+                                    stroke-linejoin="round" 
+                                    stroke-width="3" 
+                                    x1="20.649" 
+                                    x2="3.354" 
+                                    y1="20.649" 
+                                    y2="3.354">
+                                </line>
+                                </svg>
+                        </button>                        
                     </div>      
                     <div class="overflow-scroll overflow-x-hidden h-96 border">
                         <h6 class="ml-4 font-semibold text-sm my-3">
-                            Suggested
+                            Suggested ({{ userCount }})
                         </h6>
                         <ul class="ml-4">
                             <li 
@@ -106,7 +138,8 @@ export default {
         buttonClasse: {
             type: String,
             required: false
-        }        
+        },
+        userCount: Number,  
     },
     setup () {
         const el = ref(null)
