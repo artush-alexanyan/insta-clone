@@ -44,7 +44,7 @@
             </div>
         </div>
         <div 
-            class="fixed  top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2  xl:w-1/3 lg:w-2/5 md:w-3/4 w-[90%]  md:h-3/4 h-1/2 rounded-xl bg-white z-0 shadow-2xl" 
+            class="fixed  overflow-hidden top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2  xl:w-1/3 lg:w-2/5 md:w-3/4 w-[90%]  md:h-3/4 h-1/2 rounded-xl bg-white z-0 shadow-2xl" 
             v-else
         >
         
@@ -60,11 +60,11 @@
                 </button>
             </div>   
 
-            <div class="grid place-items-center w-full h-full overflow-hidden" :class="currentCropSize != '' ? 'bg-gray-200' : ''">
+            <div class="flex p-2 justify-center mx-auto w-full h-full overflow-hidden" :class="currentCropSize != '' ? 'bg-slate-800' : ''">
                 <img 
                     :src="selectedFiles" 
                     :class="currentCropSize" 
-                    class="w-3/4 h-3/4" 
+                   
                     :style="`transform: scale(${rangeScale}); transition: transform .2s;`" 
                     alt="selected-image"
                 >

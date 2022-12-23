@@ -81,14 +81,12 @@ export default {
         const showTitles = ref(false)
 
         onMounted (() => {
-            console.log('User ', user.value)
+
         })
 
         return {
             changeTab: (index, title) => {
                 tab.value = index
-                console.log('index ', index)
-                console.log('Title ', title)
                 if(title === 'Search'){
                     showTitles.value = !showTitles.value
                 }
