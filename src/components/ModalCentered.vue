@@ -20,7 +20,10 @@
                 <div class="modal_body md:w-96 w-80">
                     <div class="modal_header py-2 flex justify-between items-center border-b border-gray-300">
                         <button class="ml-4" @click="closeModal = false">
-                            <svg aria-label="Close" class="_ab6-" color="#262626" fill="#262626" height="18" role="img" viewBox="0 0 24 24" width="18"><polyline fill="none" points="20.643 3.357 12 12 3.353 20.647" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></polyline><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" x1="20.649" x2="3.354" y1="20.649" y2="3.354"></line></svg>
+                            <CloseSVG 
+                                :height="'18'" 
+                                :width="'18'" 
+                            />
                         </button>
                         <p class="font-semibold text-lg">New message</p>
                         <button class="mr-4" :class="selected.length ? 'text-blue-700' : 'text-blue-300'">Next</button>
@@ -29,7 +32,7 @@
                         <p class="font-semibold text-lg mx-4">To:</p>
                             <ul class="mx-4 grid grid-cols-3">
                                 <li 
-                                    class="text-xs text-blue-500 mx-1 my-1 flex items-center bg-blue-100 rounded-full px-2 py-1" 
+                                    class="text-xs text-blue-500 mx-1 my-1 flex items-center justify-between bg-blue-100 rounded-full px-2 py-1" 
                                     v-for="(sel, index) in selected" 
                                     :key="index"
                                 > 
@@ -37,7 +40,10 @@
                                         {{ sel.name }}
                                     </span>
                                     <button class="text-sm font-bold ml-2 text-blue-600" @click="selectUser(sel, index)">
-                                        x
+                                        <CloseSVG 
+                                            :height="'11'" 
+                                            :width="'11'" 
+                                        />
                                     </button>
                                 </li>                                
                             </ul>
@@ -50,36 +56,7 @@
                             placeholder="Search..."
                         >
                         <button class="ml-4" @click="search = ''" v-show="search.length">
-                            <svg 
-                                aria-label="Close" 
-                                class="_ab6-" 
-                                color="#262626" 
-                                fill="#262626" 
-                                height="12" 
-                                role="img" 
-                                viewBox="0 0 24 24" 
-                                width="12"
-                            >
-                                <polyline 
-                                    fill="none" 
-                                    points="20.643 3.357 12 12 3.353 20.647" 
-                                    stroke="currentColor" 
-                                    stroke-linecap="round" 
-                                    stroke-linejoin="round" 
-                                    stroke-width="3">
-                                </polyline>
-                                <line 
-                                    fill="none" 
-                                    stroke="currentColor" 
-                                    stroke-linecap="round" 
-                                    stroke-linejoin="round" 
-                                    stroke-width="3" 
-                                    x1="20.649" 
-                                    x2="3.354" 
-                                    y1="20.649" 
-                                    y2="3.354">
-                                </line>
-                                </svg>
+                            <CloseSVG />
                         </button>                        
                     </div>      
                     <div class="overflow-scroll overflow-x-hidden h-96 border">
@@ -123,9 +100,13 @@
 <script>
 import { ref, reactive } from 'vue'
 import { onClickOutside } from '@vueuse/core'
+import CloseSVG from '@/svgs/CloseSVG.vue'
 
 export default {
     name: 'ModalCentered',
+    components: {
+        CloseSVG
+    },
     props: {
         users: {    
             type: Array,

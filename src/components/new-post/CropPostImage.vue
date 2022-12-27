@@ -50,18 +50,7 @@
             class="rounded-full w-8 h-8 bg-black hover:bg-gray-600 flex items-center justify-center shadow-xl text-white mr-4"
             @click="cropItem = !cropItem"
         >
-            <svg 
-                aria-label="Select crop" 
-                class="_ab6-" 
-                color="#ffffff" 
-                fill="#ffffff" 
-                height="16" 
-                role="img" 
-                viewBox="0 0 24 24" 
-                width="16"
-            >
-                <path d="M10 20H4v-6a1 1 0 0 0-2 0v7a1 1 0 0 0 1 1h7a1 1 0 0 0 0-2ZM20.999 2H14a1 1 0 0 0 0 2h5.999v6a1 1 0 0 0 2 0V3a1 1 0 0 0-1-1Z"></path>
-            </svg>
+            <SelectCropSVG />
         </button>        
     </div>    
 </template>
@@ -69,11 +58,12 @@
 <script>
 import { ref } from 'vue'
 import { onClickOutside } from '@vueuse/core'
+import SelectCropSVG from '@/svgs/SelectCropSVG.vue'
 
 export default {
 
 components: {
-   
+    SelectCropSVG
 }, 
 props: {
     cropList: {

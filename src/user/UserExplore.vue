@@ -1,9 +1,6 @@
 <template>
     <div class="user-explore">
         <div class="grid grid-cols-4 gap-1 p-5">
-            <!-- <div class="explore-card hover:cursor-pointer" v-for="card in 30" :key="card"> 
-                <img src="../assets/explore-post-3.jpg" class="w-full" alt="">
-            </div>               -->
             <div class="" v-for="(el, index) in 20" :key="index">
                 <a class="relative block bg-gray-900 group" href="#">
                     <img class="absolute inset-0 object-cover w-full h-full group-hover:opacity-50"
