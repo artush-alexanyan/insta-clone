@@ -81,7 +81,7 @@ props: {
         required: false
     },
     currentCrop: {
-        type: String,
+        type: Number,
         required: false
     }
 },

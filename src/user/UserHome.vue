@@ -11,7 +11,7 @@
                                 class="rounded-full w-16 h-16 p-[0.125rem]"
                             >
                         </div>
-                        <p class="text-center text-xs my-1"> {{ user.nickname.substring(0,7) }} </p>
+                        <!-- <p class="text-center text-[0.5rem] font-bold my-1"> {{ user.nickname }} </p> -->
                     </div>
                 </div>
             </div>
@@ -76,13 +76,13 @@ export default {
     name: 'UserProfile',
     setup () {
 
-        const { user, IsAuthenticated, logout } = useAuth0()
+        const { user, logout } = useAuth0()
         const tab = ref(0)
         const showTitles = ref(false)
 
         onMounted (() => {
 
-        })
+        })      
 
         return {
             changeTab: (index, title) => {
@@ -99,7 +99,6 @@ export default {
                 })
             },
             user,
-            IsAuthenticated,
             tab,
             showTitles
         }
